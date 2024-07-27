@@ -34,14 +34,14 @@ def main():
    gcs_df=spark.read.table("default.cust_info_gcs")
    curts = spark.createDataFrame([1], IntegerType()).withColumn("curts", current_timestamp()).select(date_format(col("curts"), "yyyyMMddHHmmSS")).first()[0]
    print(curts)
-   gcs_df.repartition(2).write.json("gs://inceptez-data-store/dataset/cust_output_json_"+curts)
+   gcs_df.repartition(2).write.json("gs://nitin-inceptez-data-learn1-we43-usecases-3/dataset/cust_output_json_"+curts)
    print("gcs Write Completed Successfully")
 
    print("Hive to GCS usecase starts here")
    gcs_df=spark.read.table("default.cust_info_gcs")
    curts = spark.createDataFrame([1], IntegerType()).withColumn("curts", current_timestamp()).select(date_format(col("curts"), "yyyyMMddHHmmSS")).first()[0]
    print(curts)
-   gcs_df.repartition(2).write.mode("overwrite").csv("gs://inceptez-data-store/dataset/cust_csv")
+   gcs_df.repartition(2).write.mode("overwrite").csv("gs://nitin-inceptez-data-learn1-we43-usecases-3/dataset/cust_csv")
    print("gcs Write Completed Successfully")
 
 main()
